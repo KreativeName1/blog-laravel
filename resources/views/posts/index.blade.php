@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Categories') }}
+            {{ __('Posts') }}
         </h2>
     </x-slot>
 
@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                <a href="{{ route('categories.create') }}">Add new category</a>
+                <a href="{{ route('posts.create') }}">Add new post</a>
                 <table class="table">
                   <thead>
                       <tr>
@@ -18,12 +18,12 @@
                       </tr>
                   </thead>
                   <tbody>
-                      @foreach($categories as $category)
+                      @foreach($posts as $post)
                           <tr>
-                              <td>{{ $category->name }}</td>
+                              <td>{{ $post->title }}</td>
                               <td>
-                                  <a href="{{ route('categories.edit', $category) }}">Edit</a>
-                                  <form method="POST" action="{{ route('categories.destroy', $category) }}"> 
+                                  <a href="{{ route('posts.edit', $post) }}">Edit</a>
+                                  <form method="POST" action="{{ route('posts.destroy', $post) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
@@ -32,7 +32,7 @@
                           </tr>
                       @endforeach
                   </tbody>
-                </table> 
+                </table>
               </div>
             </div>
         </div>
