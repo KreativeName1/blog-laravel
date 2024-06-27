@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Parsedown;
 use App\Models\Category;
+use App\Http\Requests\PostRequest;
 class PostController extends Controller
 {
 
@@ -21,14 +24,9 @@ class PostController extends Controller
       return view('posts.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-      Post::create([
-        'title' => $request->input('title'),
-        'text' => $request->input('text'),
-        'category_id' => $request->input('category'),
-        'user_id' => auth()->id()
-      ]);
+      Post::create($request->validated());
 
       return redirect()->route('posts.index');
     }
@@ -44,14 +42,9 @@ class PostController extends Controller
       return view('posts.edit',  compact('post', 'categories'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(PostRequest $request, Post $post)
     {
-      $post->update([
-        'title' => $request->input('title'),
-        'text' => $request->input('text'),
-        'category_id' => $request->input('category')
-      ]);
-
+      $post->update($request->validated());
       return redirect()->route('posts.index');
     }
 
