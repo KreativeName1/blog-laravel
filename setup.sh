@@ -1,13 +1,18 @@
 #!/bin/bash
+# This script is used to setup the application for the first time after cloning the repository
+
+# How to use:
+# 1. Run `chmod +x setup.sh` to make this script executable
+# 2. Run `./setup.sh` to execute this script
 
 # Ensure the script exits if any command fails
 set -e
 
-# Run composer install
+# install composer dependencies
 echo "Running composer install..."
 composer install
 
-# Copy .env.example to .env
+# copie .env.example to .env file
 echo "Copying .env.example to .env..."
 cp .env.example .env
 

@@ -6,6 +6,8 @@
   </x-slot>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css/github-markdown.css">
   <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -51,10 +53,24 @@
   </div>
   </div>
   <script>
-    $('#text').on('input', function(e) {
-      document.getElementById('preview').innerHTML =
-        marked.parse(e.target.value);
+  // Configure marked.js to use highlight.js for code blocks
+  marked.setOptions({
+    highlight: function(code, lang) {
+      const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+      return hljs.highlight(code, { language }).value;
+    }
+  });
+
+  $('#text').on('input', function(e) {
+    document.getElementById('preview').innerHTML =
+      marked.parse(e.target.value);
+    // Apply syntax highlighting to all code blocks in the preview
+    document.querySelectorAll('pre code').forEach((block) => {
+      hljs.highlightBlock(block);
     });
-    $('#text').trigger('input');
-  </script>
+  });
+
+  // Trigger the input event on page load to immediately show the preview
+  $('#text').trigger('input');
+</script>
 </x-app-layout>

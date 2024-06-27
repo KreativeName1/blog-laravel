@@ -24,7 +24,7 @@
             </div>
             <select name="category" id="category" class="text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
               @foreach($categories as $category)
-              <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+              <option value="{{ $category->id }}">{{ $category->name }}</option>
               @endforeach
             </select>
             <div class="mt-3">
@@ -37,7 +37,7 @@
         <div class="mt-4 bg-white overflow-hidden shadow-xl sm:rounded-lg dark:bg-gray-800  text-gray-800 dark:text-gray-200">
           <div class="grid grid-cols-2 gap-4">
             <div class="col-span-2">
-              <textarea name="text" id="text" class="text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full">{{ $post->text }}</textarea>
+              <textarea name="text" id="text" class="text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"></textarea>
             </div>
             <div class="col-span-2">
               <div id="preview" class="markdown-body"></div>

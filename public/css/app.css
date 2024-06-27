@@ -1,0 +1,66 @@
+/* table class with borders */
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table, th, td {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 8px 16px;
+}
+
+.table .options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action {
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.edit {
+  background-color: #4CAF50;
+}
+
+.delete {
+  background-color: #f44336;
+}
+.new {
+  background-color: #008CBA;
+}
+.show {
+  background-color: #f436e4;
+}
+
+.new:hover, .edit:hover, .delete:hover, .show:hover {
+  opacity: 0.8;
+}
+
+.heart-count {
+  background-color: #cccccc;
+  border: none;
+  border-radius: 5px;
+  color: rgb(43, 43, 43);
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.markdown-body img {
+  border-radius: 5px;
+  max-width: 500px;
+  height: auto;
+}

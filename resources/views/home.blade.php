@@ -19,16 +19,16 @@
               @if ($posts->count() == 0)
               <h1>No posts found</h1>
               @endif
-              @foreach($posts as $post) 
+            @foreach($posts as $post) 
                 <div class="col-lg-6">
                     <!-- Blog post-->
                     <div class="card mb-4">
-                        <a href="{{ route('post.show', $post) }}"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                        <a href="{{ route('post', $post) }}"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
                         <div class="card-body">
                             <div class="small text-muted">{{ $post->created_at }}</div>
                             <h2 class="card-title h4">{{ $post->title }}</h2>
-                            <p class="card-text">{{ $post->text }}</p>
-                            <a class="btn btn-primary" href="{{ route('post.show', $post) }}">Read more →</a>
+                            <p class="card-text">{{ Str::limit($post->text, 400) }}</p>
+                            <a class="btn btn-primary" href="{{ route('post', $post) }}">Read more →</a>
                         </div>
                     </div>
                 </div>
@@ -54,10 +54,11 @@
             <div class="card mb-4">
                 <div class="card-header">Search</div>
                 <div class="card-body">
-                    <div class="input-group">
-                        <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                        <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                    </div>
+                    <form class="input-group" action="{{ route('search') }}" method="POST">
+                      @csrf
+                        <input name="search" class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
+                        <button class="btn btn-primary" id="button-search">Go!</button>
+                    </form>
                 </div>
             </div>
             <!-- Categories widget-->
