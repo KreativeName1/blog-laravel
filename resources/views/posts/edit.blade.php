@@ -40,6 +40,11 @@
               <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
               @endforeach
             </select>
+            <div>
+              <label for="image">Image:</label>
+            </div>
+            <input type="file" name="image" id="image" class="text-black border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+            <div id="image-preview"></div>
             <div class="mt-3">
               <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                 Save
@@ -61,6 +66,39 @@
     </form>
   </div>
   </div>
+  <style>
+    #image-preview {
+      max-width: 100%;
+      border-radius: 0.5rem;
+      padding: .5rem;
+      border: 1px solid #e5e7eb;
+      margin-top: 2rem;
+    }
+    #image-preview img {
+      border-radius: 0.5rem;
+    }
+  </style>
+  <script>
+    $('#text').on('input', function(e) {
+      document.getElementById('preview').innerHTML =
+        marked.parse(e.target.value);
+    });
+    $('#text').trigger('input');
+
+    // render image preview
+    $('#image').on('change', function(e) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        $('#image-preview').html(
+          `<img src="${e.target.result}" class="w-1/4" />`
+        );
+      };
+      reader.readAsDataURL(file);
+    });
+
+    $('#image').trigger('change');
+  </script>
   <script>
     // Configure marked.js to use highlight.js for code blocks
     marked.setOptions({

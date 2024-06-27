@@ -19,4 +19,9 @@ class Post extends Model
     public function hearts() {
         return $this->belongsToMany(User::class, 'hearts');
     }
+
+    public function ressource()
+    {
+        return $this->belongsTo(Ressource::class);
+    }
 }
